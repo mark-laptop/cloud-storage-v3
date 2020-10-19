@@ -29,6 +29,5 @@
     <ListView fx:id="fileListView"/>
     <HBox>
         <Button fx:id="btnSendFile" text="Send file" onAction="#sendFile"/>
-        <Button fx:id="btnRefresh" text="Refresh" onAction="#refreshFilesList"/>
     </HBox>
 </VBox>
