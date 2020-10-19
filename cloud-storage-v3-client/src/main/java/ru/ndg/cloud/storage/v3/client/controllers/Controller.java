@@ -39,11 +39,13 @@ public class Controller implements Initializable {
     HBox hBoxLoginPassword;
     @FXML
     Button btnSendFile;
+    @FXML
+    ListView<String> fileListView;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Callback callback = (args) -> {
-            // определить
+            refresh();
         };
         this.network = new Network(callback);
         updateInterface();
@@ -76,6 +78,7 @@ public class Controller implements Initializable {
         t.start();
         try {
             latch.await();
+            refresh();
             updateInterface();
         } catch (InterruptedException e) {
             logger.debug(e.getMessage());
@@ -104,12 +107,18 @@ public class Controller implements Initializable {
 
     public void authenticationToServer(ActionEvent actionEvent) {
         if (!isCorrectLoginPassword()) return;
-        this.network.sendAuthCommand(this.login + " " + this.password, null);
+        this.network.sendAuthCommand(this.login + " " + this.password, future -> {
+            if (future.isSuccess())
+                refresh();
+        });
     }
 
     public void registrationToServer(ActionEvent actionEvent) {
         if (!isCorrectLoginPassword()) return;
-        this.network.sendRegCommand(this.login + " " + this.password, null);
+        this.network.sendRegCommand(this.login + " " + this.password, future -> {
+            if (future.isSuccess())
+                refresh();
+        });
     }
 
     private boolean isCorrectLoginPassword() {
@@ -124,7 +133,14 @@ public class Controller implements Initializable {
     }
 
     public void sendFile(ActionEvent actionEvent) {
-        this.network.sendFile(this.login);
+        this.network.sendFile(this.login, future -> {
+            if (future.isSuccess())
+                refresh();
+        });
+    }
+
+    public void refreshFilesList(ActionEvent actionEvent) {
+        refresh();
     }
 
     private void showAlert(Alert.AlertType alertType, String msg, ButtonType buttonType) {
@@ -143,5 +159,9 @@ public class Controller implements Initializable {
             String msg = "What a fuck is this!!!!";
             showAlert(Alert.AlertType.INFORMATION, msg, ButtonType.OK);
         }
+    }
+
+    private void refresh() {
+        this.network.refresh();
     }
 }

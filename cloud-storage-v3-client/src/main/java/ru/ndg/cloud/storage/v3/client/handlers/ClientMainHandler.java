@@ -16,7 +16,7 @@ public class ClientMainHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-
+        this.callback.callback(null);
     }
 
     @Override

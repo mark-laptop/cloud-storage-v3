@@ -13,6 +13,8 @@ import ru.ndg.cloud.storage.v3.common.services.FileService;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.CountDownLatch;
 
 public class Network {
@@ -76,9 +78,9 @@ public class Network {
         return this.channel.isOpen();
     }
 
-    public void sendFile(String login) {
+    public void sendFile(String login, ChannelFutureListener listener) {
         try {
-            FileService.sendFile(login, Paths.get("cloud_storage_client","1.txt"), this.channel, null);
+            FileService.sendFile(login, Paths.get("cloud_storage_client","1.txt"), this.channel, listener);
         } catch (IOException e) {
             logger.debug(e.getMessage());
         }
@@ -90,5 +92,9 @@ public class Network {
 
     public void sendRegCommand(String cmd, ChannelFutureListener listener) {
         AuthService.sendRegCommand(cmd, this.channel, listener);
+    }
+
+    public CompletionStage<List<String>> refresh() {
+        return null;
     }
 }

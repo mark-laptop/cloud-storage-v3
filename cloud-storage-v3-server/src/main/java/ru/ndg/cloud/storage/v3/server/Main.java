@@ -1,7 +1,6 @@
 package ru.ndg.cloud.storage.v3.server;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
