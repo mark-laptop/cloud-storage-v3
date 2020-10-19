@@ -1,0 +1,29 @@
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<VBox fx:controller="ru.ndg.cloud.storage.v3.client.controllers.Controller"
+      xmlns:fx="http://javafx.com/fxml">
+    <MenuBar>
+        <Menu text="Program">
+            <MenuItem text="Close" onAction="#close"/>
+        </Menu>
+    </MenuBar>
+    <HBox fx:id="hBoxHostPort">
+        <TextField fx:id="hostField" text="localhost" promptText="HOST"/>
+        <TextField fx:id="portField" text="8189" promptText="PORT"/>
+        <Button fx:id="btnConnection" text="Connection" onAction="#connectionToServer"/>
+    </HBox>
+    <HBox fx:id="hBoxLoginPassword">
+        <TextField fx:id="loginField" promptText="LOGIN"/>
+        <PasswordField fx:id="passwordField" promptText="PASSWORD"/>
+        <Button text="Authentication" onAction="#authenticationToServer"/>
+        <Button text="Registration" onAction="#registrationToServer"/>
+    </HBox>
+    <Button fx:id="btnSendFile" text="sendFile" onAction="#sendFile"/>
+</VBox>

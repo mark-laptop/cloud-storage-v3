@@ -1,0 +1,10 @@
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<VBox fx:controller="ru.ndg.cloud.storage.v3.server.controllers.Controller"
+      xmlns:fx="http://javafx.com/fxml">
+
+    <TextField fx:id="portField" text="8189" promptText="PORT"/>
+    <Button text="Start server" onAction="#startServer"/>
+</VBox>
