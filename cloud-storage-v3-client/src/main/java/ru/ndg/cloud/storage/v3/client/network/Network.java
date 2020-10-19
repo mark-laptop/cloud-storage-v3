@@ -93,8 +93,4 @@ public class Network {
     public void sendRegCommand(String cmd, ChannelFutureListener listener) {
         AuthService.sendRegCommand(cmd, this.channel, listener);
     }
-
-    public CompletionStage<List<String>> refresh() {
-        return null;
-    }
 }

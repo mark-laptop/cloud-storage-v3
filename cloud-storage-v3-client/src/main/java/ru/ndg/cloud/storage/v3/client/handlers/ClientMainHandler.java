@@ -1,5 +1,6 @@
 package ru.ndg.cloud.storage.v3.client.handlers;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.apache.logging.log4j.LogManager;
@@ -16,7 +17,7 @@ public class ClientMainHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        this.callback.callback(null);
+        ByteBuf byteBuf = (ByteBuf) msg;
     }
 
     @Override

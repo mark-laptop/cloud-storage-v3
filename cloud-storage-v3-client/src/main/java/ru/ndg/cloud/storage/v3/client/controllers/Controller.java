@@ -44,8 +44,9 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Callback callback = (args) -> {
-            refresh();
+        Callback<Boolean> callback = (args) -> {
+            if (args)
+                refresh();
         };
         this.network = new Network(callback);
         updateInterface();
@@ -139,8 +140,7 @@ public class Controller implements Initializable {
         });
     }
 
-    public void refreshFilesList(ActionEvent actionEvent) {
-        refresh();
+    private void refresh() {
     }
 
     private void showAlert(Alert.AlertType alertType, String msg, ButtonType buttonType) {
@@ -159,9 +159,5 @@ public class Controller implements Initializable {
             String msg = "What a fuck is this!!!!";
             showAlert(Alert.AlertType.INFORMATION, msg, ButtonType.OK);
         }
-    }
-
-    private void refresh() {
-        this.network.refresh();
     }
 }

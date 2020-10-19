@@ -2,7 +2,7 @@ package ru.ndg.cloud.storage.v3.common.services;
 
 public enum TypeCommand {
 
-    AUTH_COMMAND((byte) 10), REGISTRATION_COMMAND((byte) 11), FILE_COMMAND((byte) 12), EMPTY((byte) -1);
+    AUTH_COMMAND((byte) 10), REGISTRATION_COMMAND((byte) 11), FILE_COMMAND((byte) 12), GET_LIST_FILES((byte) 13), EMPTY((byte) -1);
 
     private byte commandByte;
 
@@ -23,6 +23,9 @@ public enum TypeCommand {
         }
         if (readableByte == FILE_COMMAND.commandByte) {
             return FILE_COMMAND;
+        }
+        if (readableByte == GET_LIST_FILES.getCommandByte()) {
+            return GET_LIST_FILES;
         }
         return EMPTY;
     }

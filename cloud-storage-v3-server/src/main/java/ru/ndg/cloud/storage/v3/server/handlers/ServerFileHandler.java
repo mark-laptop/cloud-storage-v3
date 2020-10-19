@@ -79,6 +79,9 @@ public class ServerFileHandler extends ChannelInboundHandlerAdapter {
         }
         if (buf.readableBytes() == 0) {
             buf.release();
+            ByteBuf bufResult = ctx.alloc().buffer();
+            bufResult.writeBoolean(true);
+            ctx.writeAndFlush(bufResult);
         }
     }
 
