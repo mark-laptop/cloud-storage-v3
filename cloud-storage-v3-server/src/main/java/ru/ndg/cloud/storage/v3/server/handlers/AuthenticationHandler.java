@@ -50,9 +50,14 @@ public class AuthenticationHandler extends ChannelInboundHandlerAdapter {
                 buf.release();
                 String[] arrayStringAuthentication = authenticationString.split(" ");
                 User user = userService.createUser(arrayStringAuthentication[0], arrayStringAuthentication[1]);
-                this.isAuthenticated = true;
                 ByteBuf result = ctx.alloc().buffer();
-                result.writeBoolean(true);
+                if (user.getLogin() != null) {
+                    this.isAuthenticated = true;
+                    result.writeBoolean(true);
+                } else {
+                    this.isAuthenticated = false;
+                    result.writeBoolean(false);
+                }
                 ctx.writeAndFlush(result);
                 break;
             }

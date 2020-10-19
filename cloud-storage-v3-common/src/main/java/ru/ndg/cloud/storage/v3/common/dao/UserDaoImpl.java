@@ -22,8 +22,21 @@ public class UserDaoImpl implements UserDao {
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
-        session.save(user);
+        User userTemp = userIsExist(user);
+        String loginResult = null;
+        if (userTemp == null) {
+            loginResult = (String) session.save(user);
+        }
         session.getTransaction().commit();
+        if (loginResult == null || loginResult.isEmpty()) {
+            return new User();
+        }
         return user;
+    }
+
+    @Override
+    public User userIsExist(User user) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        return session.get(User.class, user.getLogin());
     }
 }

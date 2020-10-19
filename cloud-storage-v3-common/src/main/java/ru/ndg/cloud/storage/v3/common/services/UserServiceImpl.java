@@ -33,7 +33,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(String login, String password) {
         User user = userDao.createUser(login, password);
-        createUserDirectory(user);
+        if (user.getLogin() != null) {
+            createUserDirectory(user);
+        }
         return user;
     }
 

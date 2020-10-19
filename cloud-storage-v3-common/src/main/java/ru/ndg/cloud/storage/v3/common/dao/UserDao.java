@@ -6,4 +6,5 @@ public interface UserDao {
 
     User getUserByLoginAndPassword(String login, String password);
     User createUser(String login, String password);
+    User userIsExist(User user);
 }
